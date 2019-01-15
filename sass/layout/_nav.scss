@@ -1,0 +1,67 @@
+.navigation{
+    background-color: orangered;
+    position: fixed;
+    top: 0;
+    left:0;
+   // padding: 2rem;
+    
+    width: 100%;
+
+    ul{
+        list-style: none;
+
+        color: white;
+
+        display: flex;
+        
+       // justify-content: space-between;
+
+        a:link,a:visited{
+            text-decoration: none;
+            color: white;
+        
+        }
+
+
+
+        li{
+          //  background-color: olivedrab;
+            cursor: pointer;
+            padding: 2rem;
+            position: relative;
+            flex: 1;
+
+            
+
+            ul{
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+
+                background-color: olivedrab;
+            }
+        }
+
+        li:hover{
+
+            ul{
+                display: block;
+                a{
+                    display: block;
+                    padding: 2rem;
+                   
+                }
+                a:hover{
+                    background-color: orange;
+                }
+            }
+            background-color: orange;
+        }
+
+        
+
+        
+    }
+}
