@@ -1,67 +1,488 @@
-.navigation{
-    background-color: orangered;
+.navbar{
+    background-color: $color14;
     position: fixed;
-    top: 0;
-    left:0;
-   // padding: 2rem;
-    
+    left: 0;
     width: 100%;
+    top: 0;
 
-    ul{
+
+   &__container{
+
+    max-width: $grid-width !important;
+    margin: 0 auto;
+     width: 100%; 
+     padding: .5rem 1rem;
+    // background-color: $color3;
+
+    display: flex;
+    justify-content: space-between;
+     align-items: center;
+     @include respond(tport){
+
+        align-items: flex-start;
+        padding: 2rem;
+        
+    }
+   }
+
+    &__left{
+      
+      // background-color: $color4;
+
+        flex: 1;
+        color: white;
+    }
+
+    &__right{
+        position: relative;
+
+        input{
+            display: none;
+
+
+            &:checked + .navbar__label .navbar__icon{
+                height: 0;
+            }
+            &:checked + .navbar__label .navbar__icon::after{
+                transform: rotate(135deg);
+                opacity: 1;
+                top: 0rem;
+            }
+            &:checked + .navbar__label .navbar__icon::before{
+                transform: rotate(-135deg);
+                opacity: 1;
+                top: 0rem;
+            }
+
+            &:checked ~ .navbar__list{
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        
+
+        
+
+        .navbar__label{
+
+            display: none;
+
+            @include respond(tport){
+                display:block;
+                width: 4.5rem;
+                height: 4.5rem;
+                border-radius: 5px;
+                background-color: $color8;
+        
+                
+                z-index: 1;
+                
+        
+                box-shadow: .3rem .5rem 1rem .05rem rgba(0, 0, 0, 0.5);
+                cursor: pointer;
+                transition: all .2s;
+                
+            }
+
+            .navbar__icon{
+
+                width: 50%;
+                height: .3rem;
+                background-color: currentColor;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+    
+                &::after,&::before{
+                    height: .3rem;
+                    width: 100%;
+                    background-color: currentColor;
+                    position: absolute;
+                    left: 0;
+                    content: "";
+                    z-index: 2;
+                    transition: all .2s;
+    
+                }
+                &::after{
+                    top: .7rem;
+                    
+                }
+                &::before{
+                    top: -.7rem;
+                }
+
+            }
+
+            &:hover .navbar__icon::after{
+                top: .9rem;
+            }
+            &:hover .navbar__icon::before{
+                top: - .9rem;
+            }
+
+
+           
+        }
+
+       
+
+      
+
+      }
+
+    &__list{
+     
+       
+
+
+        @include respond(tport){
+           
+            visibility: hidden;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+
+            position: absolute;
+            top: 140%;
+            right: 0rem;
+            background-color:$color11;
+            border-radius: 5px;
+
+            width: 40rem;
+
+
+            &::before{
+                content: "";
+                position: absolute;
+                top: -1.2rem;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid $color11;
+                z-index: 10;
+                right: 1rem;
+              //  background-color: wheat;
+
+            }
+            
+        }
+
         list-style: none;
+       
+        display: flex;
+       // justify-content: space-around;
 
+       transition: all .3s ease-in-out;
+       
+
+       }
+
+    &__item{
+        cursor: pointer;
+
+        padding:1rem 2rem; 
+        position: relative;
+     //   text-transform: uppercase;
+        transition: all .2s;
+        border-radius: 1rem;
+        
+        
+        .hlist{
+          list-style: none;
+          position: absolute;
+          top: calc(100%);
+          left: 0;
+          text-align: left;
+          width: 200%;
+          border-radius: 1rem;
+          padding: 1rem 2rem;
+          background-color: inherit;
+          opacity: 0;
+          visibility: hidden;
+          transition: all .2s;
+
+         
+        }
+
+        &:hover{
+            background-color: lighten($color1,20%);
+            .hlist{
+                visibility: visible;
+                opacity: 1;
+
+            .hlist-item{
+                color: white;
+                transition: all .2s;
+
+                &:hover{
+                    background-color: $color1;
+                    padding: .5rem 1rem;
+                }
+            }
+
+                
+            }
+        }
+    }
+    &__link:visited,&__link:link{
+      
+        text-decoration: none;
+        color: white;
+    }
+
+    .drop{
+        position: relative;
         color: white;
 
-        display: flex;
+        label{
+            cursor: pointer;
+        }
+
+
+        ul{
+
+            list-style: none;
+            position: absolute;
+            top: calc(100%);
+            right: 0;
+            text-align: left;
+            width: 200%;
+            border-radius: 1rem;
+            padding: 1rem 2rem;
+            background-color: inherit;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .2s;
+
+        }
         
-       // justify-content: space-between;
+        input[type="checkbox"]{
+         // opacity: 0;
+         // visibility: hidden;
+         display: none;
+
+        }
+
+
+        input[type="checkbox"]:checked ~ ul{
+            opacity: 1;
+            visibility: visible;
+            background-color: lighten($color1,20%);
+                li{
+                    color: white;
+                    transition: all .2s;
+    
+                    &:hover{
+                        background-color: $color1;
+                        padding: .5rem 1rem;
+                    }
+                }
+          }
+
+         
+
+         /* 
+
+          input[type="checkbox"]:not(:focus)~ul{
+
+            opacity: 0;
+            visibility: hidden;
+ 
+          }
+          */
+          
+
+          
+
+
+        
+
+        &-icon{
+
+            content: "";
+            top: 45%;
+            position: absolute;
+           
+           
+            right: .5rem;
+            border-top: 5px solid white;
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
+            
+           }
+
+
+
+    }
+}
+
+.sidebar{
+
+
+    
+    /*Checkbox related Stuff hERE!*/
+
+ &__checkbox{display: none}
+
+
+    &__checkbox:checked + &__opener &__opener--icon{
+          
+        height: 0;
+    }
+    &__checkbox:checked + &__opener &__opener--icon::after{
+          
+        transform: rotate(135deg);
+        opacity: 1;
+        top: 0rem;
+    }
+    &__checkbox:checked + &__opener &__opener--icon::before{
+          
+        transform: rotate(-135deg);
+        opacity: 1;
+        top: 0rem;
+    }
+    &__checkbox:not(:checked) ~ &__overlay{
+     //   width: 0%;
+     visibility: hidden;
+     opacity: 0;
+    }
+
+    &__checkbox:not(:checked) ~ &__overlay &__menu{
+        width: 0%;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+   /// opener Related code here!!
+
+    &__opener{
+
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 50%;
+        background-color: $color8;
+
+        position: absolute;
+        top: 1%;
+        left: 1%;
+        z-index: 1;
+        
+
+        box-shadow: .3rem .5rem 1rem .05rem rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition: all .2s;
+
+        &--icon{
+            width: 50%;
+            height: .3rem;
+            background-color: currentColor;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+            &::after,&::before{
+                height: .3rem;
+                width: 100%;
+                background-color: currentColor;
+                position: absolute;
+                left: 0;
+                content: "";
+                z-index: 2;
+                transition: all .2s;
+
+            }
+            &::after{
+                top: .7rem;
+                
+            }
+            &::before{
+                top: -.7rem;
+            }
+
+        }
+
+        &:hover &--icon::after{
+            top: .9rem;
+        }
+        &:hover &--icon::before{
+            top: - .9rem;
+        }
+     
+    }
+    &__overlay{
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all .3s;
+        visibility: visible;
+        opacity: 1;
+
+    }
+
+    //desgining SideBar Menu now!
+
+
+    &__menu{
+        width: 35rem;
+        background-color: $color2;
+        height: 100vh;
+        position: relative;
+        text-align: center;
+        transition: all .3s;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__brand{
+        text-decoration: none;
+        font-weight: 200;
+        padding: 1rem 2rem;
+        display: inline-block;
+        border: solid .2rem white;
+        
+        font-size: 2.2rem;
+        color: wheat;
+        text-align: center;
+        margin-top: 10rem;
+        
+    }
+
+    &__list{
+        margin: 2rem 0;
+        display: block;
+       
+
+        list-style: none;
+        display: block;
+        text-align: center;
 
         a:link,a:visited{
             text-decoration: none;
-            color: white;
-        
+            color: wheat;
+
         }
 
-
-
-        li{
-          //  background-color: olivedrab;
-            cursor: pointer;
-            padding: 2rem;
-            position: relative;
-            flex: 1;
-
-            
-
-            ul{
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-
-                background-color: olivedrab;
-            }
+        &--item{
+            font-weight: 200;
+            font-family: 'Courier New', Courier, monospace;
+            color: wheat;
+            padding: 1.2rem 0;
+            box-sizing: border-box;
+            font-size: 1.4rem;
+            color: #d8d8d8;
+            border-bottom: solid 1px #d8d8dd;
+            transition: all .3s ease-in-out;
         }
-
-        li:hover{
-
-            ul{
-                display: block;
-                a{
-                    display: block;
-                    padding: 2rem;
-                   
-                }
-                a:hover{
-                    background-color: orange;
-                }
-            }
-            background-color: orange;
-        }
-
-        
-
-        
     }
+
+
+
+   
+
 }
